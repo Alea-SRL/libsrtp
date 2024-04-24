@@ -1408,6 +1408,13 @@ void srtp_event_reporter(srtp_event_data_t *data)
     }
 }
 
+static int srtcp_legacy_format = 0;
+
+void srtp_set_srtcp_legacy_format(int legacy_format)
+{
+    srtcp_legacy_format = legacy_format;
+}
+
 /*
  * srtp_event_handler is a global variable holding a pointer to the
  * event handler function; this function is called for any unexpected
@@ -3620,6 +3627,10 @@ static srtp_err_status_t srtp_calc_aead_iv_srtcp(
  */
 static uint32_t get_octets_in_rtcp_header(uint32_t packet_type)
 {
+    if(srtcp_legacy_format) {
+        return 8;
+    }
+    
     switch (packet_type) {
         case rtcp_type_app:
             return 12;

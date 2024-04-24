@@ -1506,6 +1506,8 @@ void *srtp_get_user_data(srtp_t ctx);
  * @}
  */
 
+void srtp_set_srtcp_legacy_format(int legacy_format);
+
 /**
  * @defgroup SRTPevents SRTP events and callbacks
  * @ingroup  SRTP
