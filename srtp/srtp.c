@@ -4053,7 +4053,7 @@ srtp_err_status_t srtp_protect_rtcp_mki(srtp_t ctx,
     srtcp_hdr_t *hdr = (srtcp_hdr_t *)rtcp_hdr;
     uint8_t *enc_start;            /* pointer to start of encrypted portion  */
     uint8_t *auth_start;           /* pointer to start of auth. portion      */
-    uint32_t *trailer_p;            /* pointer to start of trailer            */
+    uint8_t *trailer_p;            /* pointer to start of trailer            */
     uint32_t trailer;               /* trailer value                          */
     unsigned int enc_octet_len = 0; /* number of octets in encrypted portion */
     uint8_t *auth_tag = NULL;       /* location of auth_tag within packet     */
