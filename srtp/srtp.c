@@ -4352,8 +4352,7 @@ srtp_err_status_t srtp_unprotect_rtcp_mki(srtp_t ctx,
      */
     if (use_mki) {
         session_keys = srtp_get_session_keys(
-            stream, (uint8_t *)hdr, (const unsigned int *)pkt_octet_len,
-            &mki_size);
+            stream, (uint8_t *)hdr, (unsigned int)*pkt_octet_len, &mki_size);
 
         if (session_keys == NULL)
             return srtp_err_status_bad_mki;
