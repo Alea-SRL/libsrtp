@@ -73,9 +73,9 @@ srtp_debug_module_t mod_srtp = {
     "srtp" /* printable name for module */
 };
 
-static const size_t octets_in_rtp_header = 12;
-static const size_t octets_in_rtcp_header = 8;
-static const size_t octets_in_rtp_xtn_hdr = 4;
+#define octets_in_rtp_header 12
+#define octets_in_rtcp_header 8
+#define octets_in_rtp_xtn_hdr 4
 
 #define rtcp_type_sr 200
 #define rtcp_type_rr 201
@@ -83,7 +83,7 @@ static const size_t octets_in_rtp_xtn_hdr = 4;
 #define rtcp_type_bye 203
 #define rtcp_type_app 204
 
-static size_t srtp_get_rtp_hdr_len(const srtp_hdr_t *hdr)
+static uint32_t srtp_get_rtp_hdr_len(const srtp_hdr_t *hdr)
 {
     return octets_in_rtp_header + 4 * hdr->cc;
 }
@@ -4051,9 +4051,9 @@ srtp_err_status_t srtp_protect_rtcp_mki(srtp_t ctx,
                                         unsigned int mki_index)
 {
     srtcp_hdr_t *hdr = (srtcp_hdr_t *)rtcp_hdr;
-    uint8_t *enc_start;            /* pointer to start of encrypted portion  */
-    uint8_t *auth_start;           /* pointer to start of auth. portion      */
-    uint8_t *trailer_p;            /* pointer to start of trailer            */
+    uint8_t *enc_start;             /* pointer to start of encrypted portion  */
+    uint8_t *auth_start;            /* pointer to start of auth. portion      */
+    uint8_t *trailer_p;             /* pointer to start of trailer            */
     uint32_t trailer;               /* trailer value                          */
     unsigned int enc_octet_len = 0; /* number of octets in encrypted portion */
     uint8_t *auth_tag = NULL;       /* location of auth_tag within packet     */
@@ -4288,9 +4288,9 @@ srtp_err_status_t srtp_unprotect_rtcp_mki(srtp_t ctx,
                                           unsigned int use_mki)
 {
     srtcp_hdr_t *hdr = (srtcp_hdr_t *)srtcp_hdr;
-    uint8_t *enc_start;            /* pointer to start of encrypted portion  */
-    uint8_t *auth_start;           /* pointer to start of auth. portion      */
-    uint8_t *trailer_p;            /* pointer to start of trailer            */
+    uint8_t *enc_start;             /* pointer to start of encrypted portion  */
+    uint8_t *auth_start;            /* pointer to start of auth. portion      */
+    uint8_t *trailer_p;             /* pointer to start of trailer            */
     uint32_t trailer;               /* trailer value                          */
     unsigned int enc_octet_len = 0; /* number of octets in encrypted portion */
     uint8_t *auth_tag = NULL;       /* location of auth_tag within packet     */
