@@ -74,7 +74,7 @@ srtp_debug_module_t mod_srtp = {
 };
 
 #define octets_in_rtp_header 12
-#define octets_in_rtp_header 8
+#define octets_in_rtcp_header 8
 #define octets_in_rtp_xtn_hdr 4
 
 #define rtcp_type_sr 200
