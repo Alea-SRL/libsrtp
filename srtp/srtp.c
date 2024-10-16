@@ -74,7 +74,6 @@ srtp_debug_module_t mod_srtp = {
 };
 
 #define octets_in_rtp_header 12
-#define octets_in_rtcp_header 8
 #define octets_in_rtp_xtn_hdr 4
 
 #define rtcp_type_sr 200
@@ -3674,16 +3673,14 @@ static srtp_err_status_t srtp_protect_rtcp_aead(
     uint8_t *auth_tag = NULL;       /* location of auth_tag within packet     */
     srtp_err_status_t status;
     uint32_t octets_in_rtcp_header;
-    uint32_t uint32s_in_rtcp_header;
     uint32_t tag_len;
     uint32_t seq_num;
     v128_t iv;
     uint32_t tseq;
     unsigned int mki_size = 0;
     
-    /* get the number of octets and uint32s in rtcp header, depending on packet type */
+    /* get the number of octets in rtcp header, depending on packet type */
     octets_in_rtcp_header = get_octets_in_rtcp_header(hdr->pt);
-    uint32s_in_rtcp_header = octets_in_rtcp_header / 4;
 
     /* get tag length from stream context */
     tag_len = srtp_auth_get_tag_length(session_keys->rtcp_auth);
@@ -3851,7 +3848,6 @@ static srtp_err_status_t srtp_unprotect_rtcp_aead(
     uint8_t *auth_tag = NULL;       /* location of auth_tag within packet     */
     srtp_err_status_t status;
     uint32_t octets_in_rtcp_header;
-    uint32_t uint32s_in_rtcp_header;
     int tag_len;
     unsigned int tmp_len;
     uint32_t seq_num;
@@ -3859,9 +3855,8 @@ static srtp_err_status_t srtp_unprotect_rtcp_aead(
     uint32_t tseq;
     unsigned int mki_size = 0;
 
-    /* get the number of octets and uint32s in rtcp header, depending on packet type */
+    /* get the number of octets in rtcp header, depending on packet type */
     octets_in_rtcp_header = get_octets_in_rtcp_header(hdr->pt);
-    uint32s_in_rtcp_header = octets_in_rtcp_header / 4;
 
     /* get tag length from stream context */
     tag_len = srtp_auth_get_tag_length(session_keys->rtcp_auth);
@@ -4059,7 +4054,6 @@ srtp_err_status_t srtp_protect_rtcp_mki(srtp_t ctx,
     uint8_t *auth_tag = NULL;       /* location of auth_tag within packet     */
     srtp_err_status_t status;
     uint32_t octets_in_rtcp_header;
-    uint32_t uint32s_in_rtcp_header;
     int tag_len;
     srtp_stream_ctx_t *stream;
     uint32_t prefix_len;
@@ -4067,11 +4061,8 @@ srtp_err_status_t srtp_protect_rtcp_mki(srtp_t ctx,
     unsigned int mki_size = 0;
     srtp_session_keys_t *session_keys = NULL;
 
-    /* we assume the hdr is 32-bit aligned to start */
-
-    /* get the number of octets and uint32s in rtcp header, depending on packet type */
+    /* get the number of octets in rtcp header, depending on packet type */
     octets_in_rtcp_header = get_octets_in_rtcp_header(hdr->pt);
-    uint32s_in_rtcp_header = octets_in_rtcp_header / 4;
 
     /* check the packet length - it must at least contain a full header */
     if (*pkt_octet_len < octets_in_rtcp_header)
@@ -4298,7 +4289,6 @@ srtp_err_status_t srtp_unprotect_rtcp_mki(srtp_t ctx,
     srtp_err_status_t status;
     unsigned int auth_len;
     uint32_t octets_in_rtcp_header;
-    uint32_t uint32s_in_rtcp_header;
     int tag_len;
     srtp_stream_ctx_t *stream;
     uint32_t prefix_len;
@@ -4308,11 +4298,8 @@ srtp_err_status_t srtp_unprotect_rtcp_mki(srtp_t ctx,
     unsigned int mki_size = 0;
     srtp_session_keys_t *session_keys = NULL;
 
-    /* we assume the hdr is 32-bit aligned to start */
-
-    /* get the number of octets and uint32s in rtcp header, depending on packet type */
+    /* get the number of octets in rtcp header, depending on packet type */
     octets_in_rtcp_header = get_octets_in_rtcp_header(hdr->pt);
-    uint32s_in_rtcp_header = octets_in_rtcp_header / 4;
 
     if (*pkt_octet_len < 0)
         return srtp_err_status_bad_param;
